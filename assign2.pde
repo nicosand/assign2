@@ -2,8 +2,7 @@ PImage bg1Img, bg2Img, treasureImg, fighterImg, enemyImg, hpImg;
 PImage start1Img, start2Img, end1Img, end2Img;
 
 int x_bg1 = 0, x_bg2 = -640;
-int x_treasure, y_treasure, x_hp;
-float x_enemy, y_enemy;
+int x_treasure, y_treasure, x_hp, x_enemy, y_enemy;
 float x_fighter, y_fighter, speed = 5;
 
 int gameState;
@@ -119,8 +118,31 @@ void draw() {
       
       //enemy
       image(enemyImg, x_enemy, y_enemy);
-      x_enemy += 5;
+      x_enemy += 4;
       x_enemy %= width;
+
+      if((x_enemy) <= x_fighter){
+        if((y_enemy+30) < (y_fighter+25)){
+          y_enemy += 3;
+        }
+        else if((y_enemy+30) > (y_fighter+25)){
+          y_enemy -= 3;
+          }else{
+            y_enemy += 0;
+          }
+      }
+      if((x_enemy) > x_fighter){
+        if((y_enemy+30) < (y_fighter+25)){
+          y_enemy += 5;
+        }
+        else if((y_enemy+30) > (y_fighter+25)){
+          y_enemy -= 5;
+          }else{
+            y_enemy += 0;
+          }
+      }
+
+      
       if(y_enemy >= 420){
         y_fighter = 420;
       }
@@ -128,28 +150,6 @@ void draw() {
         y_fighter = 0;
       }
       
-      if(x_enemy+50 < x_fighter){
-        if(y_enemy < (y_fighter-5)){
-          y_enemy += 3;
-        }
-        else if((y_enemy+30) > (y_fighter+25)){
-          y_enemy -= 3;
-          }else{
-            y_enemy += 0;
-          }
-        }
-      if(x_enemy > (x_fighter+50)){
-        if(y_enemy < (y_fighter-5)){
-          y_enemy -= 3;
-        }
-        else if((y_enemy+30) > (y_fighter+25)){
-          y_enemy += 3;
-          }else{
-            y_enemy += 0;
-          }
-      }
-
-
       //hp
       fill(#ff0000);
       rect(20, 12, x_hp, 20, 12);
