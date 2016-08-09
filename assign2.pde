@@ -39,25 +39,19 @@ void draw() {
       x_enemy = 0;
       y_enemy = floor(random(420));
       x_hp = 200*1/5;
-      
+          
       //mouse action
-      if(mouseX > 203 && mouseX < 458){
+      if(mouseX >= 208 && mouseX <= 453 && mouseY >= 379 && mouseY <= 412){
         if(mousePressed){
           gameState = GAME_RUN;
         }else{
           image(start1Img, 0, 0);
         }
       }
-      if(mouseY < 379 || mouseY > 413){
-        if(mousePressed){
-          gameState = GAME_START;
-        }else{
-          image(start2Img, 0, 0);
-        }
-      }
       break;
       
     case GAME_RUN:
+
       //bg
       image(bg1Img, x_bg1, 0);
       x_bg1 += 3;
@@ -121,28 +115,15 @@ void draw() {
       x_enemy += 4;
       x_enemy %= width;
 
-      if((x_enemy) <= x_fighter){
-        if((y_enemy+30) < (y_fighter+25)){
+      if((y_enemy+60) < (y_fighter+50)){
           y_enemy += 3;
         }
-        else if((y_enemy+30) > (y_fighter+25)){
+        else if((y_enemy) > (y_fighter)){
           y_enemy -= 3;
           }else{
             y_enemy += 0;
           }
-      }
-      if((x_enemy) > x_fighter){
-        if((y_enemy+30) < (y_fighter+25)){
-          y_enemy += 5;
-        }
-        else if((y_enemy+30) > (y_fighter+25)){
-          y_enemy -= 5;
-          }else{
-            y_enemy += 0;
-          }
-      }
 
-      
       if(y_enemy >= 420){
         y_fighter = 420;
       }
@@ -171,25 +152,23 @@ void draw() {
       if(x_hp <= 0){
         gameState = GAME_OVER;
       }
-        
       break;
       
     case GAME_OVER:
       image(end2Img, 0, 0);
       //mouse action
-      if(mouseX > 203 && mouseX < 458){
+      if(mouseX >= 210 && mouseX < 433 && mouseY >= 313 && mouseY <= 345){
         if(mousePressed){
-          //click
-          gameState = GAME_START;
+          x_fighter = 590;
+          y_fighter = 215;
+          x_treasure = floor(random(600));
+          y_treasure = floor(random(440));
+          x_enemy = 0;
+          y_enemy = floor(random(420));
+          x_hp = 200*1/5;
+          gameState = GAME_RUN;
         }else{
           image(end1Img, 0, 0);
-        }
-      }
-      if(mouseY < 312 || mouseY > 345){
-        if(mousePressed){
-          gameState = GAME_OVER;
-        }else{
-          image(end2Img, 0 , 0);
         }
       }
       break;
